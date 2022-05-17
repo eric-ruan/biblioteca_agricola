@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  
 import application.models.Genero;
 import application.repositories.GeneroRepository;
-
+ 
 @Controller
 @RequestMapping("/genero")
 public class GeneroController {
@@ -42,8 +42,7 @@ public class GeneroController {
  
     @RequestMapping("/update/{id}")
     public String formUpdate(Model model, @PathVariable int id) {
-        Optional<Genero> genero;
-        genero = generoRepo.findById(id);
+        Optional<Genero> genero = generoRepo.findById(id);
         if(!genero.isPresent())
             return "redirect:/genero/list";
         model.addAttribute("genero", genero.get());
@@ -52,8 +51,7 @@ public class GeneroController {
  
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String saveUpdate(@RequestParam("nome") String nome, @RequestParam("id") int id) {
-        Optional<Genero> genero;
-        genero = generoRepo.findById(id);
+        Optional<Genero> genero = generoRepo.findById(id);
         if(!genero.isPresent())
             return "redirect:/genero/list";
         genero.get().setNome(nome);
